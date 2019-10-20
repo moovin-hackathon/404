@@ -17,7 +17,7 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cors());
-app.use('/assets',express.static());
+//app.use('/assets', express.static());
 
 app.use('/api', require('./routes'));
 
