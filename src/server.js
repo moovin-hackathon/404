@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const requireDirectory = require('require-dir');
 const path = require('path');
-process.env.PORT = 3030
+
 
 requireDirectory('./Entity');
 
