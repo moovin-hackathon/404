@@ -54,7 +54,7 @@
             function getClick() {  
                 
                  heatDiv.onclick = heatDiv.onclick = function(e) {
-                    e.preventDefault();
+                   
                     var x = e.layerX;
                     var y = e.layerY;
                     // if (e.touches) {
