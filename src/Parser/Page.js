@@ -16,8 +16,25 @@ module.exports = {
             url: request.url
         });
 
+        
+
         if (! page) {
             try {
+                var linkNew
+        var urlTemp = pageUrl
+        while(urlTemp.indexOf(".") >= 0) {
+            urlTemp = urlTemp.replace(".","_")
+            linkNew = urlTemp.replace(".","_");
+            }
+
+        while(linkNew.indexOf("/") >= 0) {
+             linkNew = urlTemp.replace("/","_");
+            }
+                   
+              images =  'assets/'+ linkNew + '.png'
+               
+              
+               
 
                 this.uploadImage(request.url, response);
 
@@ -26,8 +43,10 @@ module.exports = {
                     name: request.url,
                     url: request.url,
                     status: 'active',
-                    image: request.url.replace('/', '-') + '.png' 
+                    image: linkNew + '.png' 
                 });
+
+                console.log(page)
 
 
             } catch(e) {
@@ -43,19 +62,32 @@ module.exports = {
     },
 
     async uploadImage(pageUrl, response) {
+        var linkNew
+        var urlTemp = pageUrl
+        while(urlTemp.indexOf(".") >= 0) {
+            urlTemp = urlTemp.replace(".","_")
+            linkNew = urlTemp.replace(".","_");
+            }
+
+        while(linkNew.indexOf("/") >= 0) {
+             linkNew = urlTemp.replace("/","_");
+            }
+                   
+              images =  'assets/'+ linkNew + '.png'
+             
         await webshot(
             pageUrl, 
-            'assets/tete.png', 
+            images,
             {
                 shotSize: {
                     width: 'all', 
-                    height: 'all'
+                    height: 'all',
                 }
             },
             function(error) {
                 if (! error) {
-                    console.log(pageUrl.text(pageUrl.text().replace('/', '-') + '.png'));
-                    return pageUrl.replace('\/', '-') + '.png';
+                  
+                    return linkNew + '.png';
                 }
             }
         );
