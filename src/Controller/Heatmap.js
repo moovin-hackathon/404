@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const Heatmap = mongoose.model('Heatmap');
+const HeatmapParser = require('../Parser/Heatmap');
+const PageParser = require('../Parser/Page');
 
 module.exports = {
 
@@ -11,6 +13,17 @@ module.exports = {
      * @param {*} response 
      */
     async notify(request, response) {
-        response.send(request.body);
+        let pageData = await PageParser.parseRequest(request.body, response);
+
+        const heatmapData = await HeatmapParser.parseRequest(
+            request.body.heatmap, 
+            pageData, response
+        );
+
+        for (const heatmap of heatmapData) {
+            await heatmap.save();
+        }
+
+        return response.send();
     }
 };
