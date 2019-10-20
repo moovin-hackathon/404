@@ -4,6 +4,7 @@ const databaseConfigure = require('./Configure/Database');
 const app = express();
 const cors = require('cors');
 const requireDirectory = require('require-dir');
+const path = require('path');
 
 requireDirectory('./Entity');
 
@@ -17,7 +18,7 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cors());
-app.use('/files', express.static('../assets'));
+app.use('/files', express.static(path.resolve(__dirname, '..', 'assets')));
 
 app.use('/api', require('./routes'));
 
