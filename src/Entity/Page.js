@@ -33,7 +33,7 @@ const PageSchema = new mongoose.Schema(
     }
 );
 
-SpotSchema.virtual('image_url').get(function() {
+PageSchema.virtual('image_url').get(function() {
     return `http://localhost:${process.env.PORT}/files/${this.image}`
   })
 
