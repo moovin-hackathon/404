@@ -16,8 +16,6 @@ module.exports = {
             url: request.url
         });
 
-        
-
         if (! page) {
             try {
                 var linkNew
