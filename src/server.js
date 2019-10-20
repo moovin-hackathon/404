@@ -24,5 +24,5 @@ app.use('/pixel', express.static(path.resolve(__dirname, 'pixel.js')));
 
 app.use('/api', require('./routes'));
 
-app.listen(process.env.PORT);
+app.listen(3000);
 
