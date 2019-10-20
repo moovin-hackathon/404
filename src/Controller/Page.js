@@ -17,11 +17,20 @@ module.exports = {
         const { page = 1 } = request.query;
         const { limit = 10 } = request.query;
 
+        let userId = request.headers.user_id;
+
+        if (! userId) {
+            return response.status(400).send('Header user_id is required.');
+        }
+
         const pages = await Page.paginate(
-            {}, 
+            {
+                user: userId
+            }, 
             {
                 page, 
-                limit
+                limit,
+                populate: 'user'
             }
         );
         
@@ -34,13 +43,20 @@ module.exports = {
      * @param {*} request 
      * @param {*} response 
      */
-    async getPage(request, response) {
-        try {
-            
-            var page = await Page.findById(request.params.id);
-            
-        } catch(exception) {
-            return response.status(406).send(exception.message);
+    async getPage(request, response) { 
+        let userId = request.headers.user_id;
+        
+        if (! userId) {
+            return response.status(400).send('Header user_id is required.');
+        }
+
+        var page = await Page.findOne({
+            user: userId,
+            _id: request.params.id
+        }).populate('user').exec();
+
+        if (! page) {
+            return response.status(406).send({});
         }
 
         return response.json(page);
@@ -70,7 +86,7 @@ module.exports = {
             } 
         }
         
-        page.populate('user').execPopulate();
+        await page.populate('user').execPopulate();
     
         return response.json(page);
     },
@@ -100,7 +116,7 @@ module.exports = {
             return response.status(406).send(exception.message);
         }
         
-        page.populate('user').execPopulate();
+        await page.populate('user').execPopulate();
 
         return response.json(page);
     },
