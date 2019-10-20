@@ -11,6 +11,8 @@ module.exports = {
      * @param {*} response 
      */
     async notify(request, response) {
-        response.send(request.body);
+        response.send({
+            'Olá'
+        });
     }
 };
