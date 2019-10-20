@@ -46,7 +46,7 @@ module.exports = {
     async getPage(request, response) { 
         let userId = request.headers.user_id;
         
-        if (! userId) {
+        if (! userId) { 
             return response.status(400).send('Header user_id is required.');
         }
 

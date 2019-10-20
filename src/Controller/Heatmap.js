@@ -53,14 +53,19 @@ module.exports = {
 
     async getHetmap(request, response) {
         let userId = request.headers.user_id;
-        
+        let pageId = request.headers.page_id;
+
         if (! userId) {
             return response.status(400).send('Header user_id is required.');
+        }
+        
+        if (! pageId) {
+            return response.status(400).send('Header page_id is required.');
         }
 
         var heatmap = await Heatmap.findOne({
             user: userId,
-            _id: request.params.id
+            page: pageId
         });
         
         if (! heatmap) {
