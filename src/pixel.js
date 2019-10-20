@@ -73,8 +73,7 @@
             function getData() {
                 var today = new Date()
                     year = today.getFullYear()
-                    day = today.getDay() < 10 ? '0' + today.getDay() : today.getDay()
-                    console.log(day)
+                    day = today.getUTCDate()() < 10 ? '0' + today.getUTCDate()() : today.getUTCDate()                   
                     month = today.getMonth() < 10 ? '0' + today.getMonth() : today.getMonth()
                     date = year + '-' + month + '-'+ day
         
