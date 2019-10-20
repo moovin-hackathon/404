@@ -6,6 +6,8 @@ const User = require('./Controller/User');
 const Page = require('./Controller/Page');
 
 routes.post('/heatmap/notify', Heatmap.notify);
+routes.get('/heatmaps', Heatmap.getHetmaps);
+routes.get('/heatmap/:id', Heatmap.getHetmap);
 
 routes.post('/user', User.create);
 routes.get('/user/:email', User.getUser);
