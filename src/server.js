@@ -17,8 +17,9 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cors());
+app.use('/assets',express.static());
 
 app.use('/api', require('./routes'));
 
-app.listen(3030);
+app.listen(process.env.PORT);
 
