@@ -5,23 +5,24 @@ const PageSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: [true, 'Header user_id is required.']
         },
         name: {
             type: String,
-            required: true
+            required: [true, 'Field name is required.']
         },
         url: {
             type: String,
-            required: true
+            required: [true, 'Field url is required.']
         },
         status: {
             type: String,
-            required: true
+            required: [true, 'Field status is required.']
         },
         image: {
             type: String,
-            required: true
+            required: [true, 'Field image is required.']
         }
     }, 
     {
