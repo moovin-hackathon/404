@@ -31,7 +31,7 @@
             req = {
                 user: idUser,
                 url:  window.location.href,
-                heatmap: JSON.stringify(cordinates)
+                heatmap: cordinates
             }
 
             console.log(req)
@@ -40,7 +40,7 @@
             axios({
                 method: 'post', // verbo http
                 url: 'https://heatmap404.herokuapp.com/api/heatmap/notify', // url
-                data: { req }
+                data: req 
                 })
                 .then(response => {
                     console.log(response)
