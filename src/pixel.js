@@ -29,10 +29,13 @@
     
         async function send() {
             req = {
-                "user": idUser,
-                "url":  window.location.href,
-                "heatmap": JSON.stringify(cordinates)
+                user: idUser,
+                url:  window.location.href,
+                heatmap: JSON.stringify(cordinates)
             }
+
+            console.log(req)
+            
 
             axios({
                 method: 'post', // verbo http
