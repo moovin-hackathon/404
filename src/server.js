@@ -9,7 +9,7 @@ requireDirectory('./Entity');
 
 mongoose.connect(
     databaseConfigure.url, 
-    { 
+    {
         useNewUrlParser: true, 
         useUnifiedTopology: true 
     }
