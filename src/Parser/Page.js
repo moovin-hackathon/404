@@ -18,22 +18,19 @@ module.exports = {
 
         if (! page) {
             try {
-                var linkNew
-        var urlTemp = pageUrl
-        while(urlTemp.indexOf(".") >= 0) {
-            urlTemp = urlTemp.replace(".","_")
-            linkNew = urlTemp.replace(".","_");
-            }
+                var linkNew;
+                var urlTemp = request.url;
+                while(urlTemp.indexOf(".") >= 0) {
+                    urlTemp = urlTemp.replace(".","_");
+                    linkNew = urlTemp.replace(".","_");
+                }
 
-        while(linkNew.indexOf("/") >= 0) {
-             linkNew = urlTemp.replace("/","_");
-            }
+                while(linkNew.indexOf("/") >= 0) {
+                    linkNew = urlTemp.replace("/","_");
+                }
                    
-              images =  'assets/'+ linkNew + '.png'
+                images =  'assets/'+ linkNew + '.png';
                
-              
-               
-
                 this.uploadImage(request.url, response);
 
                 page = await Page.create({
@@ -60,18 +57,19 @@ module.exports = {
     },
 
     async uploadImage(pageUrl, response) {
-        var linkNew
-        var urlTemp = pageUrl
-        while(urlTemp.indexOf(".") >= 0) {
-            urlTemp = urlTemp.replace(".","_")
+        var linkNew;
+        var urlTemp = pageUrl;
+        
+        while (urlTemp.indexOf(".") >= 0) {
+            urlTemp = urlTemp.replace(".","_");
             linkNew = urlTemp.replace(".","_");
-            }
+        }
 
         while(linkNew.indexOf("/") >= 0) {
              linkNew = urlTemp.replace("/","_");
-            }
+        }
                    
-              images =  'assets/'+ linkNew + '.png'
+        images =  'assets/'+ linkNew + '.png'
              
         await webshot(
             pageUrl, 
