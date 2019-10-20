@@ -26,9 +26,16 @@ const PageSchema = new mongoose.Schema(
         }
     }, 
     {
+        toJSON: {
+            virtuals: true,
+          },
         timestamps: true
     }
 );
+
+SpotSchema.virtual('image_url').get(function() {
+    return `http://localhost:${process.env.PORT}/files/${this.image}`
+  })
 
 PageSchema.plugin(mongoosePaginate);
 
