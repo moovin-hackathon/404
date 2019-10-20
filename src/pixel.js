@@ -1,15 +1,15 @@
 
     window.onload = function() {
        
-        var cordinates = {}
+        var cordinates = []
         var heatDiv = document.getElementsByTagName('html')[0];      
         
        
         var script = document.createElement('script');
         script.src = "https://unpkg.com/axios/dist/axios.min.js";
         document.getElementsByTagName('head')[0].appendChild(script);
-        getData()
-        getClick()
+        getData(cordinates)
+        getClick(cordinates)
     
     
         window.onunload = function () {
@@ -40,7 +40,7 @@
             axios({
                 method: 'post', // verbo http
                 url: 'https://heatmap404.herokuapp.com/api/heatmap/notify', // url
-                data: req 
+                data:  req
                 })
                 .then(response => {
                     console.log(response)
@@ -50,11 +50,11 @@
                 })
 
             cordinates = {}
-            getData()
+            getData(cordinates)
 
             }
     
-            function getClick() {  
+            function getClick(cordinate) {  
                 
                  heatDiv.onclick = heatDiv.onclick = function(e) {
                    
@@ -65,7 +65,7 @@
                     //   y = e.touches[0].pageY;
                     // }
                   
-                   cordinates[date].push({x,y})
+                   cordinate[date].push({x,y})
                  
             
                 }    
@@ -73,13 +73,13 @@
             
             }
 
-            function getData() {
+            function getData(cordinates) {
                 var today = new Date()
                     year = today.getFullYear()
                     day = today.getUTCDate() < 10 ? '0' + today.getUTCDate() : today.getUTCDate()                   
                     month = today.getMonth() < 10 ? '0' + today.getMonth() : today.getMonth()
                     date = year + '-' + month + '-'+ day
-        
+                    
                     cordinates[date] = []
             }
         }
